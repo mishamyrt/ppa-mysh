@@ -19,6 +19,7 @@ jobs:
     - name: Create release files
       env:
         EMAIL: misha@myrt.co
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
       run: |
         echo $PRIVATE_KEY | base64 -d > private.asc
         gpg --import private.asc
