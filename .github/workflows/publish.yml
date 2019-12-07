@@ -1,0 +1,35 @@
+on: push
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Copy static files
+      run: |
+        mkdir public
+        cp packages/* public/
+        cp KEY.gpg public/
+    - name: Generate packages list
+      run: |
+        cd public/
+        dpkg-scanpackages --multiversion . > Packages
+        gzip -k -f Packages
+    - name: Create release files
+      env:
+        EMAIL: misha@myrt.co
+      run: |
+        echo $PRIVATE_KEY | base64 -d > private.asc
+        gpg --import private.asc
+        cd public/
+        apt-ftparchive release . > Release
+        gpg --default-key "${EMAIL}" -abs -o - Release > Release.gpg
+        gpg --default-key "${EMAIL}" --clearsign -o - Release > InRelease
+    - name: Publish
+      uses: crazy-max/ghaction-github-pages@master
+      with:
+        target_branch: gh-pages
+        build_dir: public
+      env:
+        GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
