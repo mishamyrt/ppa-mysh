@@ -1,3 +1,5 @@
+name: PPA install
+
 on: push
 
 jobs:
@@ -34,3 +36,18 @@ jobs:
         build_dir: public
       env:
         GITHUB_PAT: ${{ secrets.GITHUB_PAT }}
+
+  test:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Mysh from PPA
+      run: |
+        curl -s --compressed "https://mishamyrt.github.io/ppa-mysh/KEY.gpg" | apt-key add -
+        echo "deb https://mishamyrt.github.io/ppa-mysh ./" > /etc/apt/sources.list.d/mysh.list
+        apt update
+        apt install mysh
+    - name: Test output
+      run: |
+        mysh help | grep -q 'SSH' && exit 0 || exit 1
+
