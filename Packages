@@ -1,0 +1,28 @@
+Package: mysh
+Version: 0.1-0
+Architecture: amd64
+Maintainer: Mikhael Khrustik <misha@myrt.co>
+Depends: openssh-client (>= 6.7)
+Filename: ./mysh_0.1-0beta-amd64.deb
+Size: 2200776
+MD5sum: 6d784f9ba30b355134c3dcf91d6572d4
+SHA1: ac2042d722f3883d6a115ff03c1dc9124b313068
+SHA256: 8c42a11aab64878386eeb14f49aa2bcc8584eecf5f1c6a54850885973ff333fd
+Section: base
+Priority: optional
+Description: Mysh is a tool for improving SSH user experience
+
+Package: mysh
+Version: 0.1-1
+Architecture: amd64
+Maintainer: Mikhael Khrustik <misha@myrt.co>
+Depends: openssh-client (>= 6.7)
+Filename: ./mysh_0.1-1-amd64.deb
+Size: 2928328
+MD5sum: c88d9944abb8a4d6537952f50de691b4
+SHA1: 200c097dd841b6abfa26320fcb780c45de01437a
+SHA256: ee7e46dd549cc6293b95700563aa3114aa40abb8e25b76a19b6a138a12ea418b
+Section: base
+Priority: optional
+Description: Mysh is a tool for improving SSH user experience
+
